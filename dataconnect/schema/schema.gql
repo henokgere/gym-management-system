@@ -1,0 +1,49 @@
+type User @table {
+  firstName: String!
+  lastName: String!
+  email: String!
+  role: String!
+  createdAt: Timestamp!
+  phoneNumber: String
+  dateOfBirth: Date
+}
+
+type MembershipPlan @table {
+  name: String!
+  price: Float!
+  durationMonths: Int!
+  description: String!
+  createdAt: Timestamp!
+  features: [String]
+}
+
+type MemberMembership @table {
+  user: User!
+  membershipPlan: MembershipPlan!
+  startDate: Date!
+  endDate: Date!
+  status: String!
+  createdAt: Timestamp!
+  paymentStatus: String
+}
+
+type Class @table {
+  name: String!
+  instructor: User
+  startTime: String!
+  endTime: String!
+  date: Date!
+  capacity: Int!
+  createdAt: Timestamp!
+  description: String
+  location: String
+}
+
+type Booking @table {
+  member: User!
+  class: Class!
+  bookingDate: Timestamp!
+  status: String!
+  createdAt: Timestamp!
+  checkInTime: Timestamp
+}
