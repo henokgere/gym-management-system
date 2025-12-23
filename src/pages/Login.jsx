@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { auth, db } from "../firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { collection, query, where, getDocs } from "firebase/firestore";
-
-import './loginPage.css';
-
+import Modal from "../components/Modal";
+import './loginPage.css'
 const Login = ({ onSuccess }) => {
   const [identifier, setIdentifier] = useState(""); // email or memberId
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [modal, setModal] = useState({ show: false, title: "", message: "" });
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -35,9 +35,10 @@ const Login = ({ onSuccess }) => {
       await signInWithEmailAndPassword(auth, email, password);
 
       // Callback on success
-      if (onSuccess) onSuccess();
+      if (onSuccess)
+        setModal({ show: true, title: "Success", message: "Logged in successfully!" });
     } catch (error) {
-      alert(error.message);
+      setModal({ show: true, title: "Error", message: error.message });
     } finally {
       setLoading(false);
     }
@@ -70,6 +71,14 @@ const Login = ({ onSuccess }) => {
           {loading ? "Logging in..." : "Login"}
         </button>
       </form>
+
+      {/* Modal */}
+      <Modal
+        show={modal.show}
+        onClose={() => setModal({ ...modal, show: false })}
+        title={modal.title}
+        message={modal.message}
+      />
     </div>
   );
 };
