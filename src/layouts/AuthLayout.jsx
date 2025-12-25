@@ -7,7 +7,7 @@ export default function AuthLayout({ onSuccess }) {
 
   return (
     <div className="auth-layout">
-      <div className="auth-toggle">
+      <nav className="auth-toggle">
         <button
           className={mode === "login" ? "active" : ""}
           onClick={() => setMode("login")}
@@ -20,7 +20,7 @@ export default function AuthLayout({ onSuccess }) {
         >
           Register
         </button>
-      </div>
+      </nav>
 
       <div className="auth-content">
         {mode === "login" && <Login onSuccess={onSuccess} />}

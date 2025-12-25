@@ -19,13 +19,14 @@ export default function AdminLayout({ user }) {
 
   return (
     <div className="admin-layout">
-      <aside>
+      <aside className="sidebar">
+        <h1 id="splash-brand" className="logo text-reveal gradient-text delay-1" style={{textAlign: 'left'}}>जिम</h1>
         <button onClick={() => setPage("dashboard")}>Dashboard</button>
         <button onClick={() => setPage("members")}>Members</button>
         <button onClick={() => setPage("trainers")}>Trainers</button>
       </aside>
 
-      <main>{renderPage()}</main>
+      <main className="main-content">{renderPage()}</main>
     </div>
   );
 }

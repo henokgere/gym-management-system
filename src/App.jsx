@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import { subscribeToAuthChanges } from "./services/authLocal";
 
 import './App.css'
+import './styles/navbar.css';
+import './styles/aside.css';
 
 import SplashScreen from "./components/SplashScreen";
 import Landing from "./pages/LandingPage";
 import AuthLayout from "./layouts/AuthLayout";
-// import AdminLayout from "./layouts/AdminLayout";
+import AdminLayout from "./layouts/AdminLayout";
 // import EmployeeLayout from "./layouts/EmployeeLayout";
 // import TrainerLayout from "./layouts/TrainerLayout";
 // import CustomerLayout from "./layouts/CustomerLayout";
@@ -27,37 +29,28 @@ export default function App() {
     return unsubscribe;
   }, []);
 
+  const layouts = {
+    admin: <AdminLayout user={user} />,
+    // employee: <EmployeeLayout user={user} />,
+    // trainer: <TrainerLayout user={user} />,
+    // customer: <CustomerLayout user={user} />,
+  };
+
   return (
     <div className="appRoot">
       <SplashScreen />
       {
         loading && <div>Loading...</div>
       }
-      { 
-        !user ? view === "landing" ?
-          <Landing onLogin={() => setView("auth")} />
-          :
-          <AuthLayout onSuccess={() => setView("app")} />
-        :
-        <div>Hi</div>
-        // // 🏋️ Role-based Layouts
-        // switch (user.role) {
-        //   case "admin":
-        //     return <AdminLayout user={user} />;
-      
-        //   case "employee":
-        //     return <EmployeeLayout user={user} />;
-      
-        //   case "trainer":
-        //     return <TrainerLayout user={user} />;
-      
-        //   case "customer":
-        //     return <CustomerLayout user={user} />;
-      
-        //   default:
-        //     return <div>Invalid role</div>;
-        // }
+      { !user ? (
+          view === "landing"
+            ? <Landing onLogin={() => setView("auth")} />
+            : <AuthLayout onSuccess={() => setView("app")} />
+        ) : (
+          layouts[user.role] || <div>Invalid role</div>
+        )
       }
+
     </div>
   )
 

@@ -1,0 +1,60 @@
+aside {
+    background-color: #333;
+    display: grid;
+    grid-template-columns: auto;
+}
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar default (desktop) */
+.sidebar {
+  width: 220px;
+  background: #222;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.sidebar button {
+  background: transparent;
+  border: none;
+  color: #fff;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.sidebar button:hover {
+  background: #444;
+}
+
+/* Main content */
+.main-content {
+  flex: 1;
+  padding: 1.5rem;
+}
+
+/* Responsive: collapse sidebar into top bar */
+@media (max-width: 768px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0.5rem;
+  }
+
+  .sidebar button {
+    flex: 1;
+    text-align: center;
+    padding: 0.5rem;
+  }
+}
