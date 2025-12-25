@@ -7,7 +7,11 @@
 .dashboard-header h2 {
   margin: 0;
   font-size: 1.8rem;
-  color: #333;
+  color: #fff;
+}
+
+.dashboard-header .name{
+  color: #ff3d00;
 }
 
 .dashboard-header p {

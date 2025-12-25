@@ -4,53 +4,66 @@
   align-items: center;
 }
 
-/* navbar container */
+/* =========================
+   Auth Toggle Navbar
+========================= */
+/* The navbar container */
 .auth-toggle {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.85); /* Slightly darker for better contrast */
+  backdrop-filter: blur(10px);    /* Modern frosted glass effect */
+  padding: 1rem 1.5rem;
+  z-index: 40;
   display: flex;
-  justify-content: center;
-  background: #f1f3f5;
-  border-radius: 8px;
-  overflow: hidden;
-  width: 100%;
-  max-width: 400px;
+  justify-content: center;        /* Centers the buttons */
+  gap: 2rem;
 }
 
-/* Buttons */
+/* Base button style (Nav link style) */
 .auth-toggle button {
-  flex: 1;
-  padding: 0.75rem 1rem;
+  background: none;
   border: none;
   outline: none;
-  background: transparent;
-  cursor: pointer;
+  color: #ffffff;
   font-size: 1rem;
-  font-weight: 600;
-  color: #555;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
   transition: all 0.3s ease;
+  opacity: 0.7;
+  position: relative;
 }
 
 .auth-toggle button:hover {
-  background: #e9ecef;
+  opacity: 1;
 }
 
-/* Active state */
+/* Active Indicator (Underline effect) */
 .auth-toggle button.active {
-  background: #ff6b35;
-  color: #fff;
+  opacity: 1;
+  color: #3b82f6; /* Matching your theme blue */
 }
 
+.auth-toggle button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 2px;
+  background-color: #3b82f6;
+  border-radius: 2px;
+}
 
-
-/* Responsive */
-@media (max-width: 600px) {
-  .auth-toggle {
-    flex-direction: column;
-  }
-
-  .auth-toggle button {
-    width: 100%;
-    text-align: center;
-  }
+.auth-content {
+  width: 100%;
+  max-width: 400px;
+  background: #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 }
 
 

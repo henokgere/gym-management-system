@@ -16,7 +16,7 @@ export default function TrainerDashboard({ user }) {
   return (
     <div className="trainer-dashboard">
       <header className="dashboard-header">
-        <h2>Welcome, Coach {user?.name || "Trainer"} 💪</h2>
+        <h2>Welcome, Coach <span className="name">{user?.name || "Trainer"}</span> 💪</h2>
         <p>Here’s your training overview.</p>
       </header>
 
