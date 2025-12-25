@@ -3,6 +3,7 @@ import { subscribeToAuthChanges } from "./services/authLocal";
 
 import './App.css'
 
+import SplashScreen from "./components/SplashScreen";
 import Landing from "./pages/LandingPage";
 import AuthLayout from "./layouts/AuthLayout";
 // import AdminLayout from "./layouts/AdminLayout";
@@ -26,38 +27,38 @@ export default function App() {
     return unsubscribe;
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  return (
+    <div className="appRoot">
+      <SplashScreen />
+      {
+        loading && <div>Loading...</div>
+      }
+      { 
+        !user ? view === "landing" ?
+          <Landing onLogin={() => setView("auth")} />
+          :
+          <AuthLayout onSuccess={() => setView("app")} />
+        :
+        <div>Hi</div>
+        // // 🏋️ Role-based Layouts
+        // switch (user.role) {
+        //   case "admin":
+        //     return <AdminLayout user={user} />;
+      
+        //   case "employee":
+        //     return <EmployeeLayout user={user} />;
+      
+        //   case "trainer":
+        //     return <TrainerLayout user={user} />;
+      
+        //   case "customer":
+        //     return <CustomerLayout user={user} />;
+      
+        //   default:
+        //     return <div>Invalid role</div>;
+        // }
+      }
+    </div>
+  )
 
-  
-  // 🌐 Landing Page
-  if (view === "landing" && !user) {
-    return <Landing onLogin={() => setView("auth")} />;
-  }
-
-  // 🔐 Auth
-  if (!user) {
-    return <AuthLayout onSuccess={() => setView("app")} />;
-  }
-
-  else{
-    return (<div>Hi</div>)
-  }
-
-  // // 🏋️ Role-based Layouts
-  // switch (user.role) {
-  //   case "admin":
-  //     return <AdminLayout user={user} />;
-
-  //   case "employee":
-  //     return <EmployeeLayout user={user} />;
-
-  //   case "trainer":
-  //     return <TrainerLayout user={user} />;
-
-  //   case "customer":
-  //     return <CustomerLayout user={user} />;
-
-  //   default:
-  //     return <div>Invalid role</div>;
-  // }
 }
