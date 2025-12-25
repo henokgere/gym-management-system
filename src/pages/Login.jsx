@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { auth, db } from "../firebaseConfig";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { loginUser } from "../services/authLocal";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import Modal from "../components/Modal";
 import './loginPage.css'
@@ -9,40 +8,54 @@ const Login = ({ onSuccess }) => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [modal, setModal] = useState({ show: false, title: "", message: "" });
-
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
       let email = identifier;
+      const users = JSON.parse(localStorage.getItem("users")) || {};
 
-      // If identifier is not an email, try to find it as memberId in Firestore
+      // If identifier is not an email, try to find it as memberId in localStorage
       if (!/\S+@\S+\.\S+/.test(identifier)) {
-        const q = query(
-          collection(db, "users"),
-          where("memberId", "==", identifier)
+        const userByMemberId = Object.values(users).find(
+          (u) => u.memberId === identifier
         );
-        const snapshot = await getDocs(q);
-        if (snapshot.empty) {
+        if (!userByMemberId) {
           throw new Error("Member ID not found");
         }
-        const userData = snapshot.docs[0].data();
-        email = userData.email;
+        email = userByMemberId.email;
       }
 
-      // Sign in with Firebase Auth
-      await signInWithEmailAndPassword(auth, email, password);
+      // Find user by email
+      const user = users[email];
+      if (!user) {
+        throw new Error("User not found");
+      }
 
-      // Callback on success
-      if (onSuccess)
-        setModal({ show: true, title: "Success", message: "Logged in successfully!" });
+      // Check password
+      if (user.password !== password) {
+        throw new Error("Invalid password");
+      }
+
+      // Set current user session
+      localStorage.setItem("currentUser", JSON.stringify(user));
+
+      // Success modal
+      setModal({
+        show: true,
+        title: "Success",
+        message: "Logged in successfully!",
+      });
+
+      if (onSuccess) onSuccess();
     } catch (error) {
       setModal({ show: true, title: "Error", message: error.message });
     } finally {
       setLoading(false);
     }
   };
+
 
   return (
     <div className="login-container">

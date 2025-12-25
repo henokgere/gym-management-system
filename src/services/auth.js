@@ -1,16 +1,22 @@
-import { auth, db } from "../firebaseConfig";
+import app from "../firebaseConfig";
 import {
+  getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged
 } from "firebase/auth";
 import {
+  getFirestore,
   doc,
   setDoc,
   getDoc,
   serverTimestamp
 } from "firebase/firestore";
+
+
+export const auth = getAuth(app);
+export const db = getFirestore(app);
 
 /* ---------------------------------------------------
    REGISTER (Admin / Employee only creates users)

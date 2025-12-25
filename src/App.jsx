@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { subscribeToAuthChanges } from "./services/auth";
+import { subscribeToAuthChanges } from "./services/authLocal";
 
 import './App.css'
 
@@ -28,6 +28,7 @@ export default function App() {
 
   if (loading) return <div>Loading...</div>;
 
+  
   // 🌐 Landing Page
   if (view === "landing" && !user) {
     return <Landing onLogin={() => setView("auth")} />;
@@ -36,6 +37,10 @@ export default function App() {
   // 🔐 Auth
   if (!user) {
     return <AuthLayout onSuccess={() => setView("app")} />;
+  }
+
+  else{
+    return (<div>Hi</div>)
   }
 
   // // 🏋️ Role-based Layouts
