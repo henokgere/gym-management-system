@@ -2,6 +2,7 @@ import { useState } from "react";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import MembersPage from "../pages/admin/MembersPage";
 import TrainersPage from "../pages/admin/TrainersPage";
+import Logout from "../components/Logout";
 
 export default function AdminLayout({ user }) {
   const [page, setPage] = useState("dashboard");
@@ -24,6 +25,8 @@ export default function AdminLayout({ user }) {
         <button onClick={() => setPage("dashboard")}>Dashboard</button>
         <button onClick={() => setPage("members")}>Members</button>
         <button onClick={() => setPage("trainers")}>Trainers</button>
+
+        <Logout onLogout={() => window.location.reload()} />
       </aside>
 
       <main className="main-content">{renderPage()}</main>
