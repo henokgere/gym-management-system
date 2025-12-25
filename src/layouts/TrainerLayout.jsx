@@ -1,9 +1,9 @@
-import TrainersPage from "../pages/admin/TrainersPage";
+import TrainersDashboard from "../pages/trainer/TrainerDashboard";
 
 export default function TrainerLayout({ user }) {
   return (
     <div className="trainer-layout">
-      <TrainersPage user={user} />
+      <TrainersDashboard user={user} />
     </div>
   );
 }
