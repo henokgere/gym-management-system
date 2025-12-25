@@ -9,8 +9,8 @@ import SplashScreen from "./components/SplashScreen";
 import Landing from "./pages/LandingPage";
 import AuthLayout from "./layouts/AuthLayout";
 import AdminLayout from "./layouts/AdminLayout";
-// import EmployeeLayout from "./layouts/EmployeeLayout";
-// import TrainerLayout from "./layouts/TrainerLayout";
+import EmployeeLayout from "./layouts/EmployeeLayout";
+import TrainerLayout from "./layouts/TrainerLayout";
 // import CustomerLayout from "./layouts/CustomerLayout";
 
 export default function App() {
@@ -27,12 +27,12 @@ export default function App() {
     });
 
     return unsubscribe;
-  }, []);
+  }, [view]);
 
   const layouts = {
     admin: <AdminLayout user={user} />,
-    // employee: <EmployeeLayout user={user} />,
-    // trainer: <TrainerLayout user={user} />,
+    employee: <EmployeeLayout user={user} />,
+    trainer: <TrainerLayout user={user} />,
     // customer: <CustomerLayout user={user} />,
   };
 

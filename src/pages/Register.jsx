@@ -86,6 +86,7 @@ const Register = ({ onSuccess }) => {
           <option value="customer">Customer</option>
           <option value="admin">Admin</option>
           <option value="employee">Employee</option>
+          <option value="trainer">Trainer</option>
         </select>
 
         <button type="submit" className="btn-primary" disabled={loading}>
