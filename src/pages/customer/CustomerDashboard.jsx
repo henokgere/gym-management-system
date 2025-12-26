@@ -3,6 +3,7 @@ import { workoutCategories } from "../../data/workouts";
 import WorkoutList from "./WorkoutList";
 
 import "./customer.css"
+import Logout from "../../components/Logout";
 
 export default function CustomerDashboard({ user }) {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -12,8 +13,11 @@ export default function CustomerDashboard({ user }) {
       {/* Navbar */}
       <nav className="navbar">
         <div className="navbar-inner">
-          <span className="logo small gradient-text">जिम</span>
-          <span className="muted">Welcome, {user?.name || "Member"}</span>
+            <span className="logo small gradient-text">जिम</span>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', maxWidth: 'fit-content', marginLeft: 'auto', marginTop: '10px', }}>
+                <span className="muted">Welcome, {user?.name || "Member"}</span>
+                <Logout onLogout={() => window.location.reload()} />
+            </div>
         </div>
       </nav>
 
