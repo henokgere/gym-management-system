@@ -11,7 +11,7 @@ import AuthLayout from "./layouts/AuthLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import EmployeeLayout from "./layouts/EmployeeLayout";
 import TrainerLayout from "./layouts/TrainerLayout";
-// import CustomerLayout from "./layouts/CustomerLayout";
+import CustomerLayout from "./layouts/CustomerLayout";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -33,7 +33,7 @@ export default function App() {
     admin: <AdminLayout user={user} />,
     employee: <EmployeeLayout user={user} />,
     trainer: <TrainerLayout user={user} />,
-    // customer: <CustomerLayout user={user} />,
+    customer: <CustomerLayout user={user} />,
   };
 
   return (
