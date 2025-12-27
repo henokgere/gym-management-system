@@ -32,14 +32,7 @@ export default function EmployeeDashboard({ user }) {
         </div>
       </section>
 
-      <section className="quick-actions">
-        <h3>Quick Actions</h3>
-        <ul>
-          <li>➕ Register a new member</li>
-          <li>📋 View member list</li>
-          <li>👨‍🏫 Check trainer assignments</li>
-        </ul>
-      </section>
+
     </div>
   );
 }
